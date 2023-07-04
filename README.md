@@ -1,6 +1,8 @@
 # 💫 About Me
 
-🧑🏻‍💻 Back-end developer<br>🥋 Brazilian Jiu-Jitsu purple belt<br>🚲 MTB XC addicted
+🧑🏻‍💻 Back-end developer 🤓
+🥋 Brazilian JiuJitsu Bown Belt 🟤
+🚲 MTB XC addicted 💉
 
 ## 🌐 Socials
 
