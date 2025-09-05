@@ -1,10 +1,8 @@
 # 💫 About Me
 
-👨‍💻 Backend Engineer always in search of ideal solutions for the many challenges in the software world. From analysis, architecture, infrastructure, implementation, integration, to deployment—whether it’s PHP, Python or TypeScript, there’s no strategy better than the one that perfectly fits the goal.
+With over 8 years in the software industry, I’ve built deep, hands-on experience across the stack—from back-end development to infrastructure and DevOps. I thrive on optimizing development workflows and bridging the gap between code and operations to create smoother, smarter systems. ⚙️
 
-🥋 Beyond the screen, I have other passions too. I aim to apply the same principles from programming in sports (and vice versa!). As a brown belt instructor in Brazilian Jiu-Jitsu with the Eagles BJJ team in Castiglione del Lago, Perugia, I’m dedicated to sharing this art and discipline with others. 🤝💥
-
-In short, the guiding principle is always the same: become the best version of yourself every single day. 💪✨
+When I'm not engineering solutions, you’ll find me on the mat as a Brazilian Jiu-Jitsu master 🥋—a discipline that sharpens my focus, resilience, and drive. Whether it’s through technology or training, I’m always learning, pushing limits, and staying curious about what’s next.
 
 ### Social
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=flat&logo=Instagram&logoColor=white)](https://instagram.com/notsosnake) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/notsosnake) [![YouTube](https://img.shields.io/badge/YouTube-%23FF0000.svg?style=flat&logo=YouTube&logoColor=white)](https://www.youtube.com/channel/UCBrdeWN55pCaedWgbelmXyg)
