@@ -19,7 +19,3 @@ When I'm not engineering solutions, you’ll find me on the mat as a Brazilian J
 ### GitHub Stats
 
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=m-bonanno&theme=dark&hide_border=false" alt="GitHub Streak" />
-
-<hr>
-
-[![](https://visitcount.itsvg.in/api?id=m-bonanno&icon=0&color=1)](https://visitcount.itsvg.in)
