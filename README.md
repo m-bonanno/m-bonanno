@@ -18,9 +18,7 @@ When I'm not engineering solutions, you’ll find me on the mat as a Brazilian J
 
 ### GitHub Stats
 
-<img src="https://github-readme-stats.vercel.app/api?username=m-bonanno&theme=dark&hide_border=false&include_all_commits=true&count_private=true" alt="GitHub Stats" />
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=m-bonanno&theme=dark&hide_border=false" alt="GitHub Streak" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=m-bonanno&theme=dark&hide_border=false&include_all_commits=true&count_private=true&layout=compact" alt="Top Languages" />
 
 <hr>
 
