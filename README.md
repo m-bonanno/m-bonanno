@@ -15,7 +15,3 @@ When I'm not engineering solutions, you’ll find me on the mat as a Brazilian J
 ## Infrastructure and Databases
 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white) ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=flat&logo=mysql&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=flat&logo=postgresql&logoColor=white)
-
-## GitHub Stats
-
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=m-bonanno&theme=dark&hide_border=false" alt="GitHub Streak" />
