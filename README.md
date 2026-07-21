@@ -114,14 +114,9 @@ When I'm not engineering solutions, you'll find me on the mat as a Brazilian Jiu
 
 ---
 
-## 📊 GitHub Stats
+## 📊 Top Languages
 
 <p align="center">
-  <img
-    src="./profile/stats.svg"
-    height="180"
-    alt="GitHub Stats"
-  />
   <img
     src="./profile/top-langs.svg"
     height="180"
