@@ -13,9 +13,14 @@ on:
 jobs:
   generate-stats:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     permissions:
       contents: write
+
+    env:
+      STATS_OPTIONS: username=m-bonanno&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true
+      LANGS_OPTIONS: username=m-bonanno&layout=compact&theme=tokyonight&hide_border=true&langs_count=8
 
     steps:
       - name: Checkout repository
@@ -24,26 +29,90 @@ jobs:
       - name: Create stats directory
         run: mkdir -p profile
 
-      - name: Generate GitHub stats
+      # Attenzione: quando la query GraphQL viene rifiutata con
+      # RESOURCE_LIMITS_EXCEEDED questa action NON fallisce, scrive una card
+      # "Something went wrong" e chiude con successo. Il retry va quindi
+      # pilotato guardando il contenuto del file, non l'esito dello step.
+      - name: Generate stats card (attempt 1)
+        continue-on-error: true
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: stats
-          options: username=m-bonanno&show_icons=true&theme=tokyonight&hide_border=true&include_all_commits=true
+          options: ${{ env.STATS_OPTIONS }}
           path: profile/stats.svg
-          token: ${{ secrets.PROFILE_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check stats card (attempt 1)
+        id: check1
+        run: |
+          if grep -q "Something went wrong" profile/stats.svg 2>/dev/null; then
+            echo "valid=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "valid=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Backoff before attempt 2
+        if: steps.check1.outputs.valid == 'false'
+        run: sleep 45
+
+      - name: Generate stats card (attempt 2)
+        if: steps.check1.outputs.valid == 'false'
+        continue-on-error: true
+        uses: readme-tools/github-readme-stats-action@v1
+        with:
+          card: stats
+          options: ${{ env.STATS_OPTIONS }}
+          path: profile/stats.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check stats card (attempt 2)
+        id: check2
+        if: steps.check1.outputs.valid == 'false'
+        run: |
+          if grep -q "Something went wrong" profile/stats.svg 2>/dev/null; then
+            echo "valid=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "valid=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Backoff before attempt 3
+        if: steps.check1.outputs.valid == 'false' && steps.check2.outputs.valid == 'false'
+        run: sleep 90
+
+      - name: Generate stats card (attempt 3)
+        if: steps.check1.outputs.valid == 'false' && steps.check2.outputs.valid == 'false'
+        continue-on-error: true
+        uses: readme-tools/github-readme-stats-action@v1
+        with:
+          card: stats
+          options: ${{ env.STATS_OPTIONS }}
+          path: profile/stats.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Generate top languages
+        continue-on-error: true
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: top-langs
-          options: username=m-bonanno&layout=compact&theme=tokyonight&hide_border=true&langs_count=8
+          options: ${{ env.LANGS_OPTIONS }}
           path: profile/top-langs.svg
-          token: ${{ secrets.PROFILE_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Ultima rete di sicurezza: una card di errore non deve mai finire in
+      # un commit e sostituire una card buona gia' pubblicata.
+      - name: Discard error cards
+        run: |
+          for f in profile/stats.svg profile/top-langs.svg; do
+            if [ -f "$f" ] && grep -q "Something went wrong" "$f"; then
+              echo "::warning::$f is an error card, restoring the committed version"
+              git checkout -- "$f" 2>/dev/null || rm -f "$f"
+            fi
+          done
 
       - name: Commit generated cards
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile/*.svg
+          git add profile/*.svg 2>/dev/null || true
           git commit -m "chore: update GitHub stats" || exit 0
           git push

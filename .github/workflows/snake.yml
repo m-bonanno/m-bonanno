@@ -16,25 +16,73 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     permissions:
       contents: write
 
     steps:
-      # Serve un token personale: il GITHUB_TOKEN di Actions non regge
-      # la query GraphQL sui contributi e restituisce
-      # "Resource limits for this query exceeded".
-      - name: Generate contribution snake
+      # GitHub applica un limite di costo per singola query GraphQL
+      # (RESOURCE_LIMITS_EXCEEDED, in vigore dal 2025-09-01). Sul calendario
+      # contributi di questo account scatta a intermittenza, circa una volta
+      # su quattro, e l'action fallisce subito senza ritentare.
+      # Un token personale non aiuta: il limite e' sul costo della query,
+      # non sui permessi. Quindi ritentiamo con backoff crescente.
+      - name: Generate snake (attempt 1)
+        id: snake1
+        continue-on-error: true
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: m-bonanno
-          github_token: ${{ secrets.PROFILE_TOKEN }}
           outputs: |
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
 
+      - name: Backoff before attempt 2
+        if: steps.snake1.outcome == 'failure'
+        run: sleep 45
+
+      - name: Generate snake (attempt 2)
+        id: snake2
+        if: steps.snake1.outcome == 'failure'
+        continue-on-error: true
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: m-bonanno
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+
+      - name: Backoff before attempt 3
+        if: steps.snake1.outcome == 'failure' && steps.snake2.outcome == 'failure'
+        run: sleep 90
+
+      - name: Generate snake (attempt 3)
+        id: snake3
+        if: steps.snake1.outcome == 'failure' && steps.snake2.outcome == 'failure'
+        continue-on-error: true
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: m-bonanno
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+
+      # Se tutti i tentativi falliscono non pubblichiamo nulla: sul branch
+      # output resta la snake del giorno prima, che nel README si vede uguale.
+      - name: Verify snake was generated
+        id: verify
+        run: |
+          if [ -s dist/github-contribution-grid-snake.svg ] \
+            && [ -s dist/github-contribution-grid-snake-dark.svg ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Snake generation failed on all attempts; keeping the previously published SVG."
+          fi
+
       - name: Publish snake to output branch
+        if: steps.verify.outputs.ok == 'true'
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
