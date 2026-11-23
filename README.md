@@ -50,6 +50,45 @@
 
 ---
 
+## ⬇️ Featured project: Scia
+
+<p align="center">
+  <a href="https://github.com/m-bonanno/scia">
+    <img
+      src="https://raw.githubusercontent.com/m-bonanno/scia/develop/docs/design/downloads-in-progress.png"
+      width="720"
+      alt="Scia with a few downloads in progress"
+    />
+  </a>
+</p>
+
+**[Scia](https://github.com/m-bonanno/scia)** is a free, open-source download manager for Windows: paste a link, it fetches it over several connections, resumes it if it breaks, and asks nothing else of you. No ads, no tracking, nothing collected. 🔒
+
+Electron · Node · React · TypeScript, built test-first, with every change reviewed before it ships.
+
+<p align="center">
+  <a href="https://github.com/m-bonanno/scia/releases">
+    <img
+      src="https://img.shields.io/github/v/release/m-bonanno/scia?include_prereleases&style=for-the-badge&label=download"
+      alt="Download Scia"
+    />
+  </a>
+  <a href="https://github.com/sponsors/m-bonanno">
+    <img
+      src="https://img.shields.io/badge/Sponsor-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white"
+      alt="Sponsor on GitHub"
+    />
+  </a>
+  <a href="https://ko-fi.com/notsosnake">
+    <img
+      src="https://img.shields.io/badge/Ko--fi-FF5E5B?style=for-the-badge&logo=kofi&logoColor=white"
+      alt="Support on Ko-fi"
+    />
+  </a>
+</p>
+
+---
+
 ## 👨‍💻 About Me
 
 With over 8 years in the software industry, I've built deep, hands-on experience across the stack — from back-end development to infrastructure and DevOps. I thrive on optimizing development workflows and bridging the gap between code and operations to create smoother, smarter systems. ⚙️
@@ -106,6 +145,7 @@ When I'm not engineering solutions, you'll find me on the mat as a Brazilian Jiu
 
 ## 🚀 Currently Working On
 
+- ⬇️ [Scia](https://github.com/m-bonanno/scia), an open-source download manager for Windows, on its way to v1.0.0
 - Backend services with TypeScript, NestJS and PostgreSQL
 - Docker-based deployment infrastructure
 - CI/CD automation and developer experience
@@ -142,6 +182,12 @@ When I'm not engineering solutions, you'll find me on the mat as a Brazilian Jiu
     <img
       src="https://img.shields.io/badge/Let's_connect_on_LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"
       alt="Connect on LinkedIn"
+    />
+  </a>
+  <a href="https://github.com/sponsors/m-bonanno">
+    <img
+      src="https://img.shields.io/badge/Sponsor_my_work-EA4AAA?style=for-the-badge&logo=githubsponsors&logoColor=white"
+      alt="Sponsor my work on GitHub"
     />
   </a>
 </p>
